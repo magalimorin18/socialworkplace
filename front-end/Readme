@@ -1,0 +1,12 @@
+Aller dans Section2
+npm install
+npm start
+
+
+Commenter un block avec // = ctrl & :
+Comment en block avec /* */ = shift & alt & A
+
+States :
+useState returns an array with exactly two elements - the second element is always a
+function which you can call to set a new value for your state. Calling that function
+will then also trigger React to re-evaluate the component.

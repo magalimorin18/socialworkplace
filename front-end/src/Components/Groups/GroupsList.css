@@ -1,0 +1,9 @@
+.groups-list{
+    list-style : none;
+    padding:0;
+}
+
+.groups-list__fallback {
+    color : white;
+    text-align : center;
+}
