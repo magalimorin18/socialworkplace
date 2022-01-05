@@ -1,10 +1,44 @@
-# social_workplace
+# Social Workplace
+
+## Students
+
+[Hugues Baratgin](https://github.com/Xseuguh)
+[Magali Morin](https://github.com/magalimorin18)
+
+#### Due date
+:calendar: **9/12/2021**
+:calendar: **13/04/2022**
+
+## :books: Subject of the project
+
+> TODO: To be redefined
+
+Build a social workplace, integrated on a software that helps people who are working from home to feel more integrated.
+
+To do so we will:
+1. Create a front end witg React
+2. Create a back end with C#
+3. Connect the back end to microsoft API
+4. Integrate our solution on teams
 
 
-## Data
+## :runner: Running the code
 
+```bash
+python main
+```
 
-## Dev
+## :package: Organisation of the project
 
-- Install the dependencies `make install-dev`
-- Setup the pre-commit script: `pre-commit install`
+### Structure
+
+```bash
+├── .fx/config
+│   └── azure.parameters.dev.json
+└── font-end
+│   └── build
+├── node_ module
+├── template
+├── README.md
+
+```
