@@ -147,6 +147,6 @@ package-lock.json
 .vscode
 .build
 .github
-.templates
+templates/
 30_Projet_INFONUM_Social Workplace.pdf
 Social Workplace - Rapport 1.pdf
