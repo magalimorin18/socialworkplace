@@ -25,7 +25,7 @@ To do so we will:
 ## :runner: Running the code
 
 ```bash
-python main
+To complete
 ```
 
 ## :package: Organisation of the project
@@ -33,12 +33,10 @@ python main
 ### Structure
 
 ```bash
-├── .fx/config
-│   └── azure.parameters.dev.json
+├── backend
+│   └── to complete
 └── font-end
-│   └── build
-├── node_ module
-├── template
+│   └── to complete
 ├── README.md
 
 ```
