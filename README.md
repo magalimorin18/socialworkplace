@@ -11,8 +11,6 @@
 
 ## :books: Subject of the project
 
-> TODO: To be redefined
-
 Build a social workplace, integrated on a software that helps people who are working from home to feel more integrated.
 
 To do so we will:
