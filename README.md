@@ -6,8 +6,8 @@
 [Magali Morin](https://github.com/magalimorin18)
 
 #### Due date
-:calendar: **9/12/2021**
-:calendar: **13/04/2022**
+:calendar: **9/12/2021** Soutenance intermédiaire
+:calendar: **13/04/2022** Soutenance finale
 
 ## :books: Subject of the project
 
