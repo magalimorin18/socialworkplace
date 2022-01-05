@@ -18,8 +18,8 @@ namespace backend.Controllers
         //     .Request()
         //     .GetAsync();
         private static List<Models.Group> Groups = new List<Models.Group>{
-            new Models.Group{Id = 0,Name="Football"},
-            new Models.Group{Id = 1,Name="Cinéma"}
+            new Models.Group{Id = 0,Title="Football"},
+            new Models.Group{Id = 1,Title="Cinéma"}
         };
 
         [HttpGet]
@@ -32,7 +32,7 @@ namespace backend.Controllers
         [HttpPost]
         public ActionResult<string> Post(Models.Group group)
         {
-            var existingGroup = Groups.Find(g => g.Name == group.Name);
+            var existingGroup = Groups.Find(g => g.Title == group.Title);
             if (existingGroup != null)
             {
                 return Conflict("This group already exists.");
@@ -40,7 +40,7 @@ namespace backend.Controllers
             //TODO : Ajouter un nouveau groupe (channel) dans l'équipe
             group.Id = -1;
             Groups.Add(group);
-            return Created(Request.Path.ToString() + "/" + group.Name, group);
+            return Created(Request.Path.ToString() + "/" + group.Title, group);
         }
 
         [HttpDelete]
