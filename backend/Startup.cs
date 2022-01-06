@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Identity.Web;
+
 
 namespace backend
 {
@@ -30,6 +33,13 @@ namespace backend
             {
                 builder.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
             }));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"))
+                .EnableTokenAcquisitionToCallDownstreamApi()
+                .AddMicrosoftGraph(Configuration.GetSection("MicrosoftGraph"))
+                .AddInMemoryTokenCaches();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -51,8 +61,10 @@ namespace backend
 
             app.UseHttpsRedirection();
 
+
             app.UseRouting();
 
+            // app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
