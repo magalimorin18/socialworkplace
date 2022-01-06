@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Groups from "../Groups/Groups";
 import "./GroupForm.css";
 
 const GroupForm = (props) => {
@@ -13,9 +14,10 @@ const GroupForm = (props) => {
     const groupData = {
       title: enteredTitle,
     };
-    props.onSaveGroupData(groupData);
     setenteredTitle("");
     console.log(enteredTitle);
+    //Verifier que le titre  props.items = contient la liste de tous les groupes
+
     fetch("https://localhost:5001/api/Group", {
       method: "POST",
       headers: { accept: "text/plain", "Content-Type": "application/json" },
@@ -24,6 +26,7 @@ const GroupForm = (props) => {
       .then((rep) => {
         if (rep.ok) {
           console.log("Groupe ajoute");
+          props.onSaveGroupData(groupData);
         } else {
           console.log("erreur");
         }
@@ -34,6 +37,7 @@ const GroupForm = (props) => {
         console.log(e);
       });
   };
+
   return (
     <form onSubmit={SubmitHandler}>
       <div className="new-group__controls">

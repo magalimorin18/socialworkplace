@@ -11,7 +11,28 @@ function GroupItem(props) {
     console.log(title);
   };
   const deleteHandler = () => {
+    // Rajouter en entrée de delete handler l'id du groupe
+    // Faire en corte que dans Groups
     console.log("groupe supprimé");
+    console.log(props.id);
+    if (window.confirm("vous allez supprimer le groupe")) {
+      fetch(`https://localhost:5001/api/Group/${props.id}`, {
+        method: "DELETE",
+      })
+        .then((rep) => {
+          if (rep.ok) {
+            console.log("Groupe supp");
+            props.onDeleteGroupData();
+          } else {
+            console.log("erreur");
+          }
+          console.log(rep);
+        })
+        .catch((e) => {
+          console.log("erreur");
+          console.log(e);
+        });
+    }
   };
 
   return (
