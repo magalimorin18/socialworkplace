@@ -1,15 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
@@ -31,7 +24,7 @@ namespace backend
         {
             services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
             {
-                builder.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+                builder.WithOrigins(Configuration.GetSection("FrontEnd")["Url"]).AllowAnyMethod().AllowAnyHeader();
             }));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -40,7 +33,10 @@ namespace backend
                 .AddMicrosoftGraph(Configuration.GetSection("MicrosoftGraph"))
                 .AddInMemoryTokenCaches();
 
+            services.AddSingleton<IConfiguration>(Configuration);
+
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "backend SocialWorkplace", Version = "v1" });
@@ -61,10 +57,9 @@ namespace backend
 
             app.UseHttpsRedirection();
 
-
             app.UseRouting();
 
-            // app.UseAuthentication();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
