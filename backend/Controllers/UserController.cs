@@ -35,7 +35,7 @@ namespace backend.Controllers
 
         [HttpPut]
         [Route("{groupId}")]
-        public async Task<ActionResult> Put(Models.User user, string groupId)
+        public async Task<ActionResult> Put(string groupId)
         {
             //TODO : Ajoute l'utilisateur au groupe (channel)
             var convMember = new AadUserConversationMember
