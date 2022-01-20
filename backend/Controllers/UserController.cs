@@ -21,36 +21,22 @@ namespace backend.Controllers
         public UserController(GraphServiceClient graphServiceClient, IConfiguration configuration)
         {
             graphClient = graphServiceClient;
-            teamId = configuration.GetSection("Teams")["TeamId"];
+            teamId = configuration.GetValue<string>("Teams:TeamId");
         }
 
-        [HttpDelete]
+        [HttpGet]
         [Route("{groupId}")]
-        public async Task<ActionResult> Delete(string groupId)
+        public async Task<ActionResult<List<Models.Group>>> Get()
         {
-            //TODO : Supprimer l'utilisateur du groupe (channel) dans l'équipe
-            await graphClient.Teams[teamId].Channels[groupId].Members["memberId"].Request().DeleteAsync();
-            return NoContent();
-        }
-
-        [HttpPut]
-        [Route("{groupId}")]
-        public async Task<ActionResult> Put(string groupId)
-        {
-            //TODO : Ajoute l'utilisateur au groupe (channel)
-            var convMember = new AadUserConversationMember
+            var rawGroups = await graphClient.Teams[teamId].Channels.Request()
+                                                                    .Filter("membershipType eq 'private'")
+                                                                    .GetAsync();
+            List<Models.Group> groups = new List<Models.Group> { };
+            foreach (var channel in rawGroups)
             {
-                Roles = new List<string>()
-                {
-                    "owner"
-                },
-                AdditionalData = new Dictionary<string, object>()
-                {
-                    {"user@odata.bind", "https://graph.microsoft.com/v1.0/me"}
-                }
-            };
-            await graphClient.Teams[teamId].Channels[groupId].Members.Request().AddAsync(convMember);
-            return Ok();
+                groups.Add(new Models.Group { Id = channel.Id, Title = channel.DisplayName });
+            }
+            return Ok(groups);
         }
     }
 }
