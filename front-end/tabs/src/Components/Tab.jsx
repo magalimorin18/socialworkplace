@@ -30,25 +30,26 @@ export default function Tab() {
 
   useEffect(() => {
     if (token) {
-      console.log(`https://localhost:5001/api/Group`);
-      fetch("https://localhost:5001/api/Group", {
+      console.log(`http://localhost:5000/api/Group`);
+      fetch("http://localhost:5000/api/Group", {
         method: "GET",
-        headers: new Header({ Authorization: `Bearer ${token}` }),
-      }).then((rep) =>
-        rep
-          .json()
-          .then((groups) => {
-            setGroups(groups);
-            console.log("je suis dans la fonction App");
-            console.log(groups);
-          })
-          .catch((e) => console.log(e))
-      );
+        headers: { Authorization: "Bearer" + token.toString() },
+      })
+        .then(
+          (rep) =>
+            rep.json().then((groups) => {
+              setGroups(groups);
+            })
+          //.catch((e) => console.logr(e))
+        )
+        .catch((e) => alert(e));
     }
-  }, [refresh, token]);
+  }, [refresh, token]); // permet que le useEffect s'actualise si le token passe de vide à rempli
 
   return (
     <div>
+      <p>{token.toString()}</p>
+      <button onClick={() => refreshPage()}>Refresh</button>
       <Header />
       <NewGroup onAddGroup={refreshPage} items={groups} />
       <Groups
