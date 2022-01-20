@@ -1,11 +1,12 @@
+using backend.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
+using Microsoft.OpenApi.Models;
 
 
 namespace backend
@@ -24,7 +25,7 @@ namespace backend
         {
             services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
             {
-                builder.WithOrigins(Configuration.GetSection("FrontEnd")["Url"]).AllowAnyMethod().AllowAnyHeader();
+                builder.WithOrigins(Configuration.GetValue<string>("FrontEnd:Url")).AllowAnyMethod().AllowAnyHeader();
             }));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -61,6 +62,8 @@ namespace backend
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.ConfigureExceptionHandler();
 
             app.UseEndpoints(endpoints =>
             {
