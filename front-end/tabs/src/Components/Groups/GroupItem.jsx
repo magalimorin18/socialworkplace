@@ -6,13 +6,29 @@ import Card from "../UI/Card";
 function GroupItem(props) {
   const [title, setTitle] = useState(props.title);
 
-  const clickHandler = () => {
-    setTitle("Updated!!");
-    console.log(title);
+  const joinHandler = () => {
+    console.log("groupe rejoint");
+    console.log(props.id);
+    if (window.confirm(`Vous souhaiter rejoindre le groupe ${props.title}`)) {
+      fetch(`https://localhost:5001/api/User/${props.id}`, {
+        method: "PUT",
+      })
+        .then((rep) => {
+          if (rep.ok) {
+            console.log("Groupe rejoint");
+            props.onJoinGroupData();
+          } else {
+            console.log("erreur");
+          }
+          console.log(rep);
+        })
+        .catch((e) => {
+          console.log("erreur");
+          console.log(e);
+        });
+    }
   };
   const deleteHandler = () => {
-    // Rajouter en entrée de delete handler l'id du groupe
-    // Faire en corte que dans Groups
     console.log("groupe supprimé");
     console.log(props.id);
     if (window.confirm("vous allez supprimer le groupe")) {
@@ -40,7 +56,7 @@ function GroupItem(props) {
       <div className="group-item__description">
         <h2>{props.title}</h2>
       </div>
-      <button className="button__b" onClick={clickHandler}>
+      <button className="button__b" onClick={joinHandler}>
         Join the group
       </button>
       <button className="button__d" onClick={deleteHandler}>
@@ -51,9 +67,3 @@ function GroupItem(props) {
 }
 
 export default GroupItem;
-
-// format document : shit + alt + F
-
-//Important : have one root element
-
-// Attention : className instead of class

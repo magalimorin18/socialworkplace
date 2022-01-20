@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Groups from "../Groups/Groups";
+//import Groups from "../Groups/Groups";
 import "./GroupForm.css";
 
 const GroupForm = (props) => {
@@ -10,32 +10,33 @@ const GroupForm = (props) => {
   };
 
   const SubmitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault(); //empecher le formulaire de recharger la page
     const groupData = {
       title: enteredTitle,
     };
     setenteredTitle("");
     console.log(enteredTitle);
     //Verifier que le titre  props.items = contient la liste de tous les groupes
-
-    fetch("https://localhost:5001/api/Group", {
-      method: "POST",
-      headers: { accept: "text/plain", "Content-Type": "application/json" },
-      body: JSON.stringify({ title: enteredTitle }),
-    })
-      .then((rep) => {
-        if (rep.ok) {
-          console.log("Groupe ajoute");
-          props.onSaveGroupData(groupData);
-        } else {
-          console.log("erreur");
-        }
-        console.log(rep);
+    if (enteredTitle !== "") {
+      fetch("https://localhost:5001/api/Group", {
+        method: "POST",
+        headers: { accept: "text/plain", "Content-Type": "application/json" },
+        body: JSON.stringify({ title: enteredTitle }),
       })
-      .catch((e) => {
-        console.log("erreur");
-        console.log(e);
-      });
+        .then((rep) => {
+          if (rep.ok) {
+            console.log("Groupe ajoute");
+            props.onSaveGroupData(groupData);
+          } else {
+            console.log("erreur");
+          }
+          console.log(rep);
+        })
+        .catch((e) => {
+          console.log("erreur");
+          console.log(e);
+        });
+    }
   };
 
   return (

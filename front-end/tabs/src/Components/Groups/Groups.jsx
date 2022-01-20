@@ -1,6 +1,6 @@
 import "./Groups.css";
 import Card from "../UI/Card";
-import GroupsList from "./GroupsList";
+//import GroupsList from "./GroupsList";
 import GroupItem from "./GroupItem";
 
 import GroupsFilter from "./GroupsFilter";
@@ -9,10 +9,10 @@ import React, { useState } from "react";
 // forward the data and then store it in a state
 
 function Groups(props) {
-  const [filteredYear, setFilteredYear] = useState("tags");
+  const [filter, setFilter] = useState("");
 
-  const filterChangeHandler = (selectedYear) => {
-    setFilteredYear(selectedYear);
+  const filterChangeHandler = (event) => {
+    setFilter(event.target.value);
   };
 
   //   const filteredExpenses = props.items.filter((expense) => {
@@ -20,25 +20,23 @@ function Groups(props) {
   //   }); //Pour filtrer sur la date
 
   return (
-    <li>
-      <Card className="groups">
-        <GroupsFilter
-          selected={filteredYear}
-          onChangeFilter={filterChangeHandler}
-        />
-        {props.items.map((group) => {
+    <Card className="groups">
+      <GroupsFilter filter={filter} onChangeFilter={filterChangeHandler} />
+      {props.items.map((group) => {
+        if (group.title.toLowerCase().includes(filter.toLowerCase())) {
           console.log(group);
           return (
             <GroupItem
               id={group.id}
-              key={group.id} // truc pour react
+              key={group.id} // id pour react
               title={group.title}
               onDeleteGroupData={props.onDeleteGroup}
+              onJoinGroupData={props.onJoinGroup}
             />
           );
-        })}
-      </Card>
-    </li>
+        }
+      })}
+    </Card>
   );
 }
 
