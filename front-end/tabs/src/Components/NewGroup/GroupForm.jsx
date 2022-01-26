@@ -20,7 +20,13 @@ const GroupForm = (props) => {
     if (enteredTitle !== "") {
       fetch("https://localhost:5001/api/Group", {
         method: "POST",
-        headers: { accept: "text/plain", "Content-Type": "application/json" },
+        headers: {
+          accept: "text/plain",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage
+            .getItem("AccessToken")
+            .toString()}`,
+        },
         body: JSON.stringify({ title: enteredTitle }),
       })
         .then((rep) => {

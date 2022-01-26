@@ -33,7 +33,7 @@ export default function Tab() {
       console.log(`http://localhost:5000/api/Group`);
       fetch("http://localhost:5000/api/Group", {
         method: "GET",
-        headers: { Authorization: "Bearer" + token.toString() },
+        headers: { Authorization: `Bearer ${token.toString()}` },
       })
         .then(
           (rep) =>

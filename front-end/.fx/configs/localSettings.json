@@ -1,28 +1,28 @@
 {
-  "teamsApp": {
-    "tenantId": "cd240ed7-b692-4389-b770-2a17043d2778",
-    "teamsAppId": "35e362ed-3d12-47a5-bc1f-f78683f763f5"
-  },
-  "auth": {
-    "clientId": "0b766349-a7a1-4901-ac04-3a6304bf211c",
-    "clientSecret": "crypto_cede9a52a7038bad2304238c05493f4e90fe3c162b1c665f0361acc21afc1c30c662a86aa18d21b51cb0b93ea85901ac9ba6b1c0250a9fed8c495c3edcec4e93aecc7c67cf04c6725a9d1c081cfc6f5ed6c1994453c820c813797ac83cd89aab9d994c1de659ddc96e6f110659bf1ac8af703985977bc22c5e2c266864636eeb2a947d986f",
-    "objectId": "7bc13df6-bbbc-4555-bbc5-eb5458d645e7",
-    "oauth2PermissionScopeId": "87a45dd8-e385-4495-ba10-2d6ff4bab649",
-    "oauthAuthority": "https://login.microsoftonline.com/cd240ed7-b692-4389-b770-2a17043d2778",
-    "oauthHost": "https://login.microsoftonline.com",
-    "applicationIdUris": "api://localhost/0b766349-a7a1-4901-ac04-3a6304bf211c",
-    "simpleAuthFilePath": "/Users/huguesbaratgin/.vscode/extensions/teamsdevapp.ms-teams-vscode-extension-3.2.0/out/templates/plugins/resource/simpleauth/SimpleAuth.zip",
-    "SimpleAuthEnvironmentVariableParams": "crypto_9a8a1c60747ac5608393ca130b101bcf6344c935deb47a816d00ccb3844d1d8bc945c174dde5719990d828c72da82e4b7a6a539e9ecf4bf76d856a3cef6e0a607e0bec499428e1e3398a89110b8d88e3d2c16ad10e1f07efe0f7a69df15aa420faab5441e08749d815e862ec3c34a89f51abd62313debdcaf3baa6c8e5c46aa78a97af14fa439f8cefd48c22df0ecd6ce5afd0e1b0b6329d3e7d7fdad43e1a85d191512691339631ad56eb7884f390fb5b13ec30b24fae907e8e8649ad2f548c6d22df0d4a309d135d3210ffb01aed717b4b7fd5c771a23b3d4839d1902304f80834f1aef62aa4338cf45a41deb1ff8a3e68b5978bacf87c1bff58e4eb34ea40a8b9d031113553b8a7eec4bf6aaa9c2263351a5cbafae20befbac1fe999f9bd302c6e4b65c23748f56e80932f63a880a179eba553fa938916ddece6551e4c66e72f7a466f87df1dd9ae610dfc1e863eccb5b23058a88252da86d77f8d6112910df98b5d05cdeb9b06d7918a6840619e0d5d475f16b8086326ec710c41be5436ad7966bcc8a2069dea7c3ab92414a8f26a2015135a7d82f511ecdf421a48bc9a2bffe71e93994a8dc76123f6c0a1ef57ef90a027a4c3893c26152d4a416398b6a27301cf3a0a2ae03208672d9a2eebe5bdc9d67f76c2a3ddc5a11644eddc99d4684480aa213cc7c6cfa4bd9bceefcd555f5b6744417961a8524a215b8a8eabef649548f838f7c2e047fd8dd1db0b7b2148040f560d3d3e5d10d86e580bbd580853b3e951114b411a39818000bb20200d86997e80e6de3b819f9b27d4bef4105d694df99984a8f9b101a7dea175f89ea3b20fcf82e20a2a3482c508362d1d7a1efef4fc96354e544c24c26a6a1606541f8f5f4b44c0b61dbc02f9a8c673852bb4af66ac798efda26173d8910682b49fce5e3b95d8eaf6ccc6ba35306c85db30957b8cf62ad735f79c1f803f782bb6023bc098f42872f640a19b28a8a16fa839de5860faa506c5a47d3a3515fb9c08adad1596dc08cd0e2e3614c4888e6f37b125e66b8d1f58d95ef7810322b055a6ba413cdcab5ec9d49edda44eef87207c48e9efe94775a",
-    "AuthServiceEndpoint": "http://localhost:55000",
-    "tenantId": "cd240ed7-b692-4389-b770-2a17043d2778"
-  },
-  "frontend": {
-    "browser": "none",
-    "https": true,
-    "trustDevCert": true,
-    "sslCertFile": "/Users/huguesbaratgin/.fx/certificate/localhost.crt",
-    "sslKeyFile": "/Users/huguesbaratgin/.fx/certificate/localhost.key",
-    "tabDomain": "localhost",
-    "tabEndpoint": "https://localhost:53000"
-  }
+    "teamsApp": {
+        "tenantId": "cd240ed7-b692-4389-b770-2a17043d2778",
+        "teamsAppId": "35e362ed-3d12-47a5-bc1f-f78683f763f5"
+    },
+    "auth": {
+        "clientId": "0b766349-a7a1-4901-ac04-3a6304bf211c",
+        "clientSecret": "crypto_2ad62ba6dcb9830131fe1936e71d3e20e171343fc6652ae383fcd4bb8c8db626fb07894a920fad5dddd25d92d6ed1f872f8815c9cc1efebcb6f1b4b889c560036cddc0214035aca4c80bce109599d9d0fd209960a05363342ae4ca8da3a79336542ecbfb4ca12bfae9db9e93739b9b13d56bda32474ecd669379deb725fe776bea3cf4d81c",
+        "objectId": "7bc13df6-bbbc-4555-bbc5-eb5458d645e7",
+        "oauth2PermissionScopeId": "11dd5c8f-79e4-42e4-8d1b-9d6a11f1eb76",
+        "oauthAuthority": "https://login.microsoftonline.com/cd240ed7-b692-4389-b770-2a17043d2778",
+        "oauthHost": "https://login.microsoftonline.com",
+        "applicationIdUris": "api://localhost/0b766349-a7a1-4901-ac04-3a6304bf211c",
+        "simpleAuthFilePath": "/Users/huguesbaratgin/.vscode/extensions/teamsdevapp.ms-teams-vscode-extension-3.2.0/out/templates/plugins/resource/simpleauth/SimpleAuth.zip",
+        "SimpleAuthEnvironmentVariableParams": "crypto_72f4989c40638ace58f58d567342a29affd1f20575cbf3d730e9c55ac3714d04f65966509293877f2a4c3568a94a05863eadb8a71e49fd5e273cd9c50dc0f7c1a18727a35912082b5ab620fca18649989462e6cd985c1d452c8943e9d206d74d856fc5731af2427a71c85ff53192baf53aedc1519f461114d015f97d251f1c82366c28c11c264f446f8f30b196af884631440e7297c789919fae946e20b514ba9b95bf73e30f9212b703ed76183e49160b1da4910124074559fce37d842d547389dd3dc12c34cfc0a441ac12b9eff3ae015857e1a00e8341126b9a25748ff7acab375e75dc9c2464628f2d0f9be14b759f12b586eb67b60b82e87ba19a419ef03a08d5f0b97d5e9b179d0c45765dbd666a50f090d3ec6bb5b505fe9f230dd0a00fbcadb0d38c1e90261ea1a37e80d4493983d3fbd1d51f8ae4694331385b0e070191562a5187e5d1de44ea7b0a1ea56ad8c6796eff818ea6b8ff01f02a17559daed29d88e1106fc33daa46841b8a65ca842f4297de11bac7db13cd45f5d7d996745ae5ac204e89a63214f65d5465e7a18cfc41e4416a56b75273f937e603a5d462e31c507ad7b76a78b71e5b3ef7ae1eea129cf2d57c560abb1724771a6bbefd4117138811a4534454b1e70e2effdcd77c4a59047ca9dfd1c3d28c5de0614689006b53e15ed603bf5e2d04b453dd74dd3b5fc9862abae3fd846f61bad5f97002da9f2d3ef912af9cd3d19eb1752bc444fbc3b70c93c9915b33b7abf7218ba7bb38d7e7a353bc8a0605997c5e5e7084c89c5e305b5869485940359fdaefa1c9c5e8af5a172aa005671c36cbef65c6cb69a095ba21fc42f0fca146ef05e6dd4e745abc8f48a4bfa88059e2a445d8075646d797100ea879e59f9c3a8b3c3f9f799034dd2bd039c37ccc69ae08b0e568c61f67b3fabf005eca64374dfbd2fe84b337aa94ea7a0da56c1582cee0d636389588e3301aa62dd273a62f4ad350455c5e48163d72f020fb989109f44c2a9d516f223fb089cbccac980f0faaa6af85e891f016dc4124459df8790e52c308a3cef36347a65e4a9f17de60eb1287c287188adc9055067f",
+        "AuthServiceEndpoint": "http://localhost:55000",
+        "tenantId": "cd240ed7-b692-4389-b770-2a17043d2778"
+    },
+    "frontend": {
+        "browser": "none",
+        "https": true,
+        "trustDevCert": true,
+        "sslCertFile": "/Users/huguesbaratgin/.fx/certificate/localhost.crt",
+        "sslKeyFile": "/Users/huguesbaratgin/.fx/certificate/localhost.key",
+        "tabDomain": "localhost",
+        "tabEndpoint": "https://localhost:53000"
+    }
 }
