@@ -45,6 +45,6 @@
   "validDomains": [],
   "webApplicationInfo": {
     "id": "{{localSettings.auth.clientId}}",
-    "resource": "api://localhost/02409369-a990-435b-a640-64e953388932"
+    "resource": "api://localhost/0b766349-a7a1-4901-ac04-3a6304bf211c"
   }
 }
