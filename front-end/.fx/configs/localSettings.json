@@ -1,0 +1,28 @@
+{
+    "teamsApp": {
+        "tenantId": "cd240ed7-b692-4389-b770-2a17043d2778",
+        "teamsAppId": "f2641cdf-31b7-40fb-aeac-d321306bb121"
+    },
+    "auth": {
+        "clientId": "02409369-a990-435b-a640-64e953388932",
+        "clientSecret": "crypto_c910f669152efe4b3379ae3bfb258c225a42302b841a0c09a39b5b732e3cfe7e64a4ca1d4f899442a4357ff19727c7117edd9957c17de2593d18b08c548f9073f713771efd4627c8c18971358fae9e4a15b0c582d7ea02bf58088d97a980798a837666be6f352f95c90c1256dc510b78c574f4dc17968107d0bf8908752a3862d1832c07e4",
+        "objectId": "f7993bf1-1226-401a-b0c1-99dfacf9c995",
+        "oauth2PermissionScopeId": "d2678f78-80b3-41e2-8295-826366c69618",
+        "oauthAuthority": "https://login.microsoftonline.com/cd240ed7-b692-4389-b770-2a17043d2778",
+        "oauthHost": "https://login.microsoftonline.com",
+        "applicationIdUris": "api://localhost/02409369-a990-435b-a640-64e953388932",
+        "simpleAuthFilePath": "c:\\Users\\magal\\.vscode\\extensions\\teamsdevapp.ms-teams-vscode-extension-3.2.0\\out\\templates\\plugins\\resource\\simpleauth\\SimpleAuth.zip",
+        "SimpleAuthEnvironmentVariableParams": "crypto_53dbab68b59ff34a69329c0ca17a60fc5d6a9a357ac0da6841d1497a8d27fe45c5259014364bb43b9cb6621383ab96cad3d9786733a73f27c61257697eb831fd656f84c39c916a89393bf430f90c6c86cb6c14614aed49a3ee05cca662e1a00ecb1d6ff1dca1f684aa6046fd044c687858b4a27d5734058635be8ee09f3f1dfcb741c6ae5c3452e085e9e4910f5a52b9c3cf12a589899114087d6eb82b0285ae3017fee3c2a19f9820923bc00b99a726c9fb5dda23d12cf2f2045738cf9de66850cab9fca9e489a81e7b91c3f2371a3d517e73b622917697e31216584031470249a5d402b6243d95b98b63672ab4eb2a947c3a36a65501b8f28656951c611570b2aa404d2f6a8bd8acc868c8724238885ea8e43df75bf385106d37be88f2c2b49f8bac833f8b08f286be70999bba5c45655c9c3aacd390a0327aef1b094dd28510c778034b2a305238e027894f03ea27b1e9c06c995b9a3785466fec4c429dfa1ce0ab8e79abd691e7d7d83098a9cb39e97fcad8b639def169c062f129cbd62885483ecaa02cacf934cba4315de5bcc27fe5de7a771ad21ba13e9b484b4d1ee210cacbbfe455b114f532b6a8cb392c602134d86d775aed793521c9011eda7d657dbc6c3c10be6c03043718e130caec24aeb9a08874dcf8c41cd41fda26c1f4f900c4880b04dd384a80c51787d10eaf4b2e28f5fedb56d4d6984ccfa10f9717d0c70e3de11f6419a3aed76995e96ef561c8c8af3f7939e9f773d18f18178a0b0c6cee95e6a54586af12ac4bf884906b82e75788f72e3df2eab77f6530c9f47475dcdf704a452aa822c442085c4d5bbd44da7bc69d0acd1271fcb9df7ef6a9e735b68af9f3e7e4f2122943f4494e8a22a08c92a08c7a389f185b5ec376e72876467433399e434141fc8409dc18a9838748effa8d518deb6cf724a5b70fb9cdc05dd132d29bc6017046ce4aa2a9b4b1025d7c163758d390264e02158e98b39ed81deaf19cebe90775f2d9b4cb3b61b1b4cc1ab228a43ef6fdbf365360f1fc80b90fd7a4fb461bd6a0e9047d46a248b7f1f4eaefc1d260b384adb864a2dbe58c7a45356b7ed0",
+        "AuthServiceEndpoint": "http://localhost:55000",
+        "tenantId": "cd240ed7-b692-4389-b770-2a17043d2778"
+    },
+    "frontend": {
+        "browser": "none",
+        "https": true,
+        "trustDevCert": true,
+        "sslCertFile": "C:\\Users\\magal/.fx/certificate/localhost.crt",
+        "sslKeyFile": "C:\\Users\\magal/.fx/certificate/localhost.key",
+        "tabDomain": "localhost",
+        "tabEndpoint": "https://localhost:53000"
+    }
+}
