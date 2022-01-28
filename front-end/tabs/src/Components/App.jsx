@@ -9,15 +9,6 @@ import Tab from "./Tab";
 import "./App.css";
 import TabConfig from "./TabConfig";
 
-/**
- * The main app which handles the initialization and routing
- * of the app.
- */
-import Groups from "./Groups/Groups";
-import NewGroup from "./NewGroup/NewGroup";
-import Header from "./UI/Header";
-import { useState } from "react";
-
 export default function App() {
   const { theme, loading } = useTeamsFx();
   return (

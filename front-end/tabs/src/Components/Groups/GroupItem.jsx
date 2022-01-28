@@ -4,8 +4,6 @@ import "./GroupItem.css";
 import Card from "../UI/Card";
 
 function GroupItem(props) {
-  const [title, setTitle] = useState(props.title);
-
   const joinHandler = () => {
     console.log("groupe rejoint");
     console.log(props.id);

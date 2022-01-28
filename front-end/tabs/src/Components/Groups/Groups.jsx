@@ -35,6 +35,7 @@ function Groups(props) {
             />
           );
         }
+        return <></>;
       })}
     </Card>
   );
