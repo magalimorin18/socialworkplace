@@ -1,0 +1,8 @@
+node_modules
+.DS_Store
+.archive
+.archive.log
+.env.teamsfx.local
+subscriptionInfo.json
+.eslintcache
+.fx
