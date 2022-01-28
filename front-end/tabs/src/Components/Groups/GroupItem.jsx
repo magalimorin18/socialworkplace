@@ -8,14 +8,17 @@ function GroupItem(props) {
     console.log("groupe rejoint");
     console.log(props.id);
     if (window.confirm(`Vous souhaiter rejoindre le groupe ${props.title}`)) {
-      fetch(`https://localhost:5001/api/Membership/${props.id}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${localStorage
-            .getItem("AccessToken")
-            .toString()}`,
-        },
-      })
+      fetch(
+        `https://socialworkplace-backend.azurewebsites.net/api/Membership/${props.id}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${localStorage
+              .getItem("AccessToken")
+              .toString()}`,
+          },
+        }
+      )
         .then((rep) => {
           if (rep.ok) {
             console.log("Groupe rejoint");
@@ -36,14 +39,17 @@ function GroupItem(props) {
     console.log("groupe supprimé");
     console.log(props.id);
     if (window.confirm("vous allez supprimer le groupe")) {
-      fetch(`https://localhost:5001/api/Group/${props.id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage
-            .getItem("AccessToken")
-            .toString()}`,
-        },
-      })
+      fetch(
+        `https://socialworkplace-backend.azurewebsites.net/api/Group/${props.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage
+              .getItem("AccessToken")
+              .toString()}`,
+          },
+        }
+      )
         .then((rep) => {
           if (rep.ok) {
             console.log("Groupe supp");
@@ -63,14 +69,17 @@ function GroupItem(props) {
   function leaveHandler() {
     console.log("Quitter le groupe ?");
     if (window.confirm(`Vous allez quitter le groupe ${props.title}`)) {
-      fetch(`https://localhost:5001/api/Membership/${props.id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage
-            .getItem("AccessToken")
-            .toString()}`,
-        },
-      })
+      fetch(
+        `https://socialworkplace-backend.azurewebsites.net/api/Membership/${props.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage
+              .getItem("AccessToken")
+              .toString()}`,
+          },
+        }
+      )
         .then((rep) => {
           if (rep.ok) {
             console.log("Groupe quitté");

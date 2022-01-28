@@ -18,7 +18,7 @@ const GroupForm = (props) => {
     console.log(enteredTitle);
     //Verifier que le titre  props.items = contient la liste de tous les groupes
     if (enteredTitle !== "") {
-      fetch("https://localhost:5001/api/Group", {
+      fetch("https://socialworkplace-backend.azurewebsites.net/api/Group", {
         method: "POST",
         headers: {
           accept: "text/plain",

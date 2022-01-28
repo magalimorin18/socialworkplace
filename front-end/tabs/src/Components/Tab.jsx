@@ -30,8 +30,10 @@ export default function Tab() {
 
   useEffect(() => {
     if (token) {
-      console.log(`http://localhost:5000/api/Group`);
-      fetch("http://localhost:5000/api/Group", {
+      console.log(
+        `https://socialworkplace-backend.azurewebsites.net/api/Group`
+      );
+      fetch("https://socialworkplace-backend.azurewebsites.net/api/Group", {
         method: "GET",
         headers: { Authorization: `Bearer ${token.toString()}` },
       })
