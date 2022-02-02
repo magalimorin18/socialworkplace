@@ -1,11 +1,12 @@
 /// Fonction fetch ///
-require("dotenv").config();
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const fetch_function = async (method_name, url_route) => {
-  // alert(process.env.REACT_APP_URL_BACKEND);
   try {
     const result = await fetch(
-      `https://socialworkplace-backend.azurewebsites.net/api/${url_route}`,
+      `${process.env.REACT_APP_BACKEND_URL}/api/${url_route}`,
       {
         method: method_name,
         headers: {
