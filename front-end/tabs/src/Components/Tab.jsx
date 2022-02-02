@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Groups from "./Groups/Groups";
-import NewGroup from "./NewGroup/NewGroup";
+import GroupForm from "./NewGroup/GroupForm";
 import Header from "./UI/Header";
 import * as microsoftTeams from "@microsoft/teams-js";
-import { fetch_function } from "./utils.js";
+import { fetchFunction } from "./utils.js";
 
 export default function Tab() {
   const [groups, setGroups] = useState([]);
@@ -31,23 +31,17 @@ export default function Tab() {
 
   useEffect(() => {
     if (hasToken) {
-      fetch_function("GET", "Group").then((group_list) =>
-        setGroups(group_list)
-      );
+      fetchFunction("GET", "Group").then((group_list) => setGroups(group_list));
     }
-  }, [refresh, hasToken]); // if refresh is modified, useeffect will be triggered
+  }, [refresh, hasToken]); // if refresh value is modified, the useEffect will be triggered
 
   return (
     <div>
-      <p>{localStorage.getItem("AccessToken").toString()}</p>
-      <button onClick={() => refreshPage()}>Refresh</button>
+      <p>{localStorage.getItem("AccessToken")}</p>
+      <button onClick={refreshPage}>Refresh</button>
       <Header />
-      <NewGroup onAddGroup={refreshPage} items={groups} />
-      <Groups
-        onDeleteGroup={refreshPage}
-        onJoinGroup={refreshPage}
-        items={groups}
-      />
+      <GroupForm refreshPage={refreshPage} items={groups} />
+      <Groups refreshPage={refreshPage} items={groups} />
     </div>
   );
 }
