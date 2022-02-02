@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import Groups from "./Groups/Groups";
 import NewGroup from "./NewGroup/NewGroup";
 import Header from "./UI/Header";
-//import { useTeams } from "msteams-react-base-component";
 import * as microsoftTeams from "@microsoft/teams-js";
-
-// var showFunction = Boolean(process.env.REACT_APP_FUNC_NAME);
+import { fetch_function } from "utils.js";
 
 export default function Tab() {
   const [groups, setGroups] = useState([]);
-  const [token, setToken] = useState("");
   const [refresh, setRefresh] = useState(false);
 
   const refreshPage = () => {
@@ -19,7 +16,7 @@ export default function Tab() {
   var authTokenRequest = {
     successCallback: function (result) {
       window.localStorage.setItem("AccessToken", result);
-      setToken(result);
+      refreshPage(); // permet que le useEffect s'actualise si le token passe de vide à rempli
     },
     failureCallback: function (error) {
       alert("Failure: " + error);
@@ -29,28 +26,15 @@ export default function Tab() {
   microsoftTeams.authentication.getAuthToken(authTokenRequest);
 
   useEffect(() => {
-    if (token) {
-      console.log(
-        `https://socialworkplace-backend.azurewebsites.net/api/Group`
-      );
-      fetch("https://socialworkplace-backend.azurewebsites.net/api/Group", {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token.toString()}` },
-      })
-        .then(
-          (rep) =>
-            rep.json().then((groups) => {
-              setGroups(groups);
-            })
-          //.catch((e) => console.logr(e))
-        )
-        .catch((e) => alert(e));
+    if (localStorage.getItem("AccessToken")) {
+      const group_list = fetch_function("GET", "Group");
+      setGroups(group_list);
     }
-  }, [refresh, token]); // permet que le useEffect s'actualise si le token passe de vide à rempli
+  }, [refresh]); // if refresh is modified, useeffect will be triggered
 
   return (
     <div>
-      <p>{token.toString()}</p>
+      <p>{localStorage.getItem("AccessToken").toString()}</p>
       <button onClick={() => refreshPage()}>Refresh</button>
       <Header />
       <NewGroup onAddGroup={refreshPage} items={groups} />

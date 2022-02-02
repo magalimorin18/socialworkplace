@@ -14,14 +14,6 @@ const GroupsFilter = (props) => {
           value={props.filter}
           onChange={props.onChangeFilter}
         />
-
-        {/* <select value={props.selected} onChange={dropdownChangeHandler}>
-          <option value="tags">Tout</option>
-          <option value="sport">Sport</option>
-          <option value="musique">Musique</option>
-          <option value="jeux">Jeux de société</option>
-          <option value="parole">Groupe de parole</option>
-        </select> */}
       </div>
     </div>
   );

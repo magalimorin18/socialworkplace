@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import Groups from "../Groups/Groups";
 import "./GroupForm.css";
 
 const GroupForm = (props) => {
@@ -10,13 +9,13 @@ const GroupForm = (props) => {
   };
 
   const SubmitHandler = (event) => {
-    event.preventDefault(); //empecher le formulaire de recharger la page
+    event.preventDefault(); //empeche le formulaire de recharger la page
     const groupData = {
       title: enteredTitle,
     };
     setenteredTitle("");
     console.log(enteredTitle);
-    //Verifier que le titre  props.items = contient la liste de tous les groupes
+    //Verifier que le titre  props.items contient la liste de tous les groupes
     if (enteredTitle !== "") {
       fetch("https://socialworkplace-backend.azurewebsites.net/api/Group", {
         method: "POST",

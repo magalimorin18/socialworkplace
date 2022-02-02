@@ -2,6 +2,7 @@ import React from "react";
 
 var functionName = process.env.REACT_APP_FUNC_NAME || "myFunc";
 
+// TODO edit this code with backend info
 export function EditCode(props) {
   const { showFunction, tabCodeEntry, functionCodePath } = {
     showFunction: true,
@@ -14,7 +15,8 @@ export function EditCode(props) {
       <h2>Change this code</h2>
       <p>
         The front end is a <code>create-react-app</code>. The entry point is{" "}
-        <code>{tabCodeEntry}</code>. Just save any file and this page will reload automatically.
+        <code>{tabCodeEntry}</code>. Just save any file and this page will
+        reload automatically.
       </p>
       {showFunction && (
         <p>
