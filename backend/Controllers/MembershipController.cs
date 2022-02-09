@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Azure.Identity;
 using Microsoft.AspNetCore.Authorization;
@@ -17,16 +18,14 @@ namespace backend.Controllers
     public class MembershipController : ControllerBase
     {
         private readonly string teamId;
-        private readonly GraphServiceClient graphClient, authGraphClient;
+        private readonly GraphServiceClient graphClient;
 
-        public MembershipController(GraphServiceClient graphServiceClient, IConfiguration configuration)
+        public MembershipController(IConfiguration configuration)
         {
             var cred = new ClientSecretCredential(configuration.GetValue<string>("AzureAd:TenantId"),
                                                 configuration.GetValue<string>("AzureAd:ClientId"),
                                                 configuration.GetValue<string>("AzureAd:ClientSecret"));
             graphClient = new GraphServiceClient(cred);
-
-            authGraphClient = graphServiceClient;
 
             teamId = configuration.GetValue<string>("Teams:TeamId");
         }
@@ -35,7 +34,8 @@ namespace backend.Controllers
         [Route("{groupId}")]
         public async Task<ActionResult> Put(string groupId)
         {
-            var user = await authGraphClient.Me.Request().GetAsync();
+            var userPreferredUsername = User.Claims.Where(c => c.Type == "preferred_username").FirstOrDefault().Value;
+
             var convMember = new AadUserConversationMember
             {
                 Roles = new List<string>()
@@ -44,7 +44,7 @@ namespace backend.Controllers
                 },
                 AdditionalData = new Dictionary<string, object>()
                 {
-                    {"user@odata.bind", $"https://graph.microsoft.com/v1.0/users('{user.Id}')"}
+                    {"user@odata.bind", $"https://graph.microsoft.com/v1.0/users('{userPreferredUsername}')"}
                 }
             };
             await graphClient.Teams[teamId].Channels[groupId].Members.Request().AddAsync(convMember);
@@ -60,19 +60,10 @@ namespace backend.Controllers
             {
                 await graphClient.Teams[teamId].Channels[groupId].Request().DeleteAsync();
                 return NoContent();
-
             }
 
-            var user = await authGraphClient.Me.Request().GetAsync();
-            var convUserId = string.Empty;
-            foreach (var convMember in convMembers)
-            {
-                if (convMember.DisplayName == user.DisplayName)
-                {
-                    convUserId = convMember.Id;
-                    break;
-                }
-            }
+            var userName = User.Claims.Where(c => c.Type == "name").FirstOrDefault().Value;
+            var convUserId = convMembers.Where(u => u.DisplayName == userName).FirstOrDefault().Id;
             await graphClient.Teams[teamId].Channels[groupId].Members[convUserId].Request().DeleteAsync();
 
             return NoContent();
