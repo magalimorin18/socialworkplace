@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Azure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
-
 namespace backend.Controllers
 {
 
@@ -17,20 +17,22 @@ namespace backend.Controllers
     public class GroupController : ControllerBase
     {
         private readonly string teamId;
-        private readonly GraphServiceClient graphClient, authGraphClient;
+        private readonly GraphServiceClient graphClient;
 
-        public GroupController(GraphServiceClient graphServiceClient, IConfiguration configuration)
+        public GroupController(IConfiguration configuration)
         {
             var cred = new ClientSecretCredential(configuration.GetValue<string>("AzureAd:TenantId"),
                                                 configuration.GetValue<string>("AzureAd:ClientId"),
                                                 configuration.GetValue<string>("AzureAd:ClientSecret"));
             graphClient = new GraphServiceClient(cred);
-            authGraphClient = graphServiceClient;
+
             teamId = configuration.GetValue<string>("Teams:TeamId");
+
+
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Models.Group>>> Get()
+        public async Task<ActionResult> Get()
         {
             var rawGroups = await graphClient.Teams[teamId].Channels.Request()
                                                                     .Filter("membershipType eq 'private'")
@@ -48,7 +50,7 @@ namespace backend.Controllers
         [HttpPost]
         public async Task<ActionResult<string>> Post(Models.Group group)
         {
-            var user = await authGraphClient.Me.Request().GetAsync();
+            var userPreferredUsername = User.Claims.Where(c => c.Type == "preferred_username").FirstOrDefault().Value;
             var channel = new Channel
             {
                 DisplayName = group.Title,
@@ -63,7 +65,7 @@ namespace backend.Controllers
                         },
                         AdditionalData = new Dictionary<string, object>()
                         {
-                            {"user@odata.bind", $"https://graph.microsoft.com/v1.0/users('{user.Id}')"}
+                            {"user@odata.bind", $"https://graph.microsoft.com/v1.0/users('{userPreferredUsername}')"}
                         }
                     }
                 }
