@@ -26,9 +26,8 @@ export default function Tab() {
 
   useEffect(
     () => microsoftTeams.authentication.getAuthToken(authTokenRequest),
-    []
+    [] // eslint-disable-line react-hooks/exhaustive-deps
   );
-
   useEffect(() => {
     if (hasToken) {
       fetchFunction("GET", "Group").then((group_list) => setGroups(group_list));
