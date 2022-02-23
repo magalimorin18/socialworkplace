@@ -1,52 +1,28 @@
 import React, { useState } from "react";
-//import Groups from "../Groups/Groups";
 import "./GroupForm.css";
+import { fetchFunction } from "../utils.js";
 
 const GroupForm = (props) => {
-  const [enteredTitle, setenteredTitle] = useState("");
+  const [enteredTitle, setEnteredTitle] = useState("");
 
   const titleChangeHandler = (event) => {
-    setenteredTitle(event.target.value);
+    setEnteredTitle(event.target.value);
   };
 
-  const SubmitHandler = (event) => {
-    event.preventDefault(); //empecher le formulaire de recharger la page
-    const groupData = {
-      title: enteredTitle,
-    };
-    setenteredTitle("");
-    console.log(enteredTitle);
-    //Verifier que le titre  props.items = contient la liste de tous les groupes
-    if (enteredTitle !== "") {
-      fetch("https://socialworkplace-backend.azurewebsites.net/api/Group", {
-        method: "POST",
-        headers: {
-          accept: "text/plain",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage
-            .getItem("AccessToken")
-            .toString()}`,
-        },
-        body: JSON.stringify({ title: enteredTitle }),
-      })
-        .then((rep) => {
-          if (rep.ok) {
-            console.log("Groupe ajoute");
-            props.onSaveGroupData(groupData);
-          } else {
-            console.log("erreur");
-          }
-          console.log(rep);
-        })
-        .catch((e) => {
-          console.log("erreur");
-          console.log(e);
-        });
+  const submitHandler = async (event) => {
+    event.preventDefault(); //empeche le formulaire de recharger la page
+    const listGroupTitle = props.items.map((group) => group.title);
+    const isExistingTitle = listGroupTitle.includes(enteredTitle);
+    if (enteredTitle !== "" && !isExistingTitle) {
+      const body = JSON.stringify({ title: enteredTitle });
+      await fetchFunction("POST", "Group", body);
+      props.refreshPage();
+      setEnteredTitle("");
     }
   };
 
   return (
-    <form onSubmit={SubmitHandler}>
+    <form onSubmit={submitHandler} className="new-group">
       <div className="new-group__controls">
         <div className="new-group__control">
           <label>Title</label>

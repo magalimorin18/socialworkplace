@@ -1,101 +1,34 @@
 import React from "react";
-// import ExpenseDate from './ExpenseDate';
 import "./GroupItem.css";
 import Card from "../UI/Card";
+import { fetchFunction } from "../utils.js";
 
 function GroupItem(props) {
-  const joinHandler = () => {
-    console.log("groupe rejoint");
-    console.log(props.id);
-    if (window.confirm(`Vous souhaiter rejoindre le groupe ${props.title}`)) {
-      fetch(
-        `https://socialworkplace-backend.azurewebsites.net/api/Membership/${props.id}`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${localStorage
-              .getItem("AccessToken")
-              .toString()}`,
-          },
-        }
-      )
-        .then((rep) => {
-          if (rep.ok) {
-            console.log("Groupe rejoint");
-            props.onJoinGroupData();
-          } else {
-            console.log("erreur");
-          }
-          console.log(rep);
-        })
-        .catch((e) => {
-          console.log("erreur");
-          console.log(e);
-        });
+  const joinHandler = async () => {
+    if (window.confirm(`You will join the group ${props.title} :D`)) {
+      await fetchFunction("PUT", `Membership/${props.id}`);
+      props.refreshPage();
     }
   };
 
-  const deleteHandler = () => {
-    console.log("groupe supprimé");
-    console.log(props.id);
-    if (window.confirm("vous allez supprimer le groupe")) {
-      fetch(
-        `https://socialworkplace-backend.azurewebsites.net/api/Group/${props.id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${localStorage
-              .getItem("AccessToken")
-              .toString()}`,
-          },
-        }
-      )
-        .then((rep) => {
-          if (rep.ok) {
-            console.log("Groupe supp");
-            props.onDeleteGroupData();
-          } else {
-            console.log("erreur");
-          }
-          console.log(rep);
-        })
-        .catch((e) => {
-          console.log("erreur");
-          console.log(e);
-        });
+  const deleteHandler = async () => {
+    if (
+      window.confirm(`You are about to delete the group ${props.title} /!\\`)
+    ) {
+      await fetchFunction("DELETE", `Group/${props.id}`);
+      props.refreshPage();
     }
   };
 
-  function leaveHandler() {
-    console.log("Quitter le groupe ?");
-    if (window.confirm(`Vous allez quitter le groupe ${props.title}`)) {
-      fetch(
-        `https://socialworkplace-backend.azurewebsites.net/api/Membership/${props.id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${localStorage
-              .getItem("AccessToken")
-              .toString()}`,
-          },
-        }
-      )
-        .then((rep) => {
-          if (rep.ok) {
-            console.log("Groupe quitté");
-            props.onDeleteGroupData();
-          } else {
-            console.log("erreur");
-          }
-          console.log(rep);
-        })
-        .catch((e) => {
-          console.log("erreur");
-          console.log(e);
-        });
+  async function leaveHandler() {
+    if (window.confirm(`You will quit the group ${props.title} :(`)) {
+      await fetchFunction("DELETE", `Membership/${props.id}`);
+      props.refreshPage();
     }
   }
 
+  // TODO afficher leave the group que si on est dans le groupe : déjà une root dans le back qui permet de récupérer les groupes dans lequel tu es
+  // TODO cleaner les css
   return (
     <Card className="group-item">
       <div className="group-item__description">
