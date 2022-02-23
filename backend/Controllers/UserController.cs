@@ -1,10 +1,10 @@
-using backend.Models;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Graph;
-using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
+using backend.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Graph;
 
 namespace backend.Controllers
 {
@@ -25,7 +25,7 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        [Route("{groupId}")]
+        [Route("Groups")]
         public async Task<ActionResult<List<Models.Group>>> Get()
         {
             var rawGroups = await graphClient.Teams[teamId].Channels.Request()
