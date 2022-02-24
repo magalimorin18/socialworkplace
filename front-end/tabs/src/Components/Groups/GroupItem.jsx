@@ -27,19 +27,21 @@ function GroupItem(props) {
     }
   }
 
-  // TODO afficher leave the group que si on est dans le groupe : déjà une root dans le back qui permet de récupérer les groupes dans lequel tu es
   // TODO cleaner les css
   return (
     <Card className="group-item">
       <div className="group-item__description">
         <h2>{props.title}</h2>
       </div>
-      <button className="button__b" onClick={joinHandler}>
-        Join the group
-      </button>
-      <button className="button__b" onClick={leaveHandler}>
-        Leave the group
-      </button>
+      {props.isInGroup ? (
+        <button className="button__b" onClick={leaveHandler}>
+          Leave the group
+        </button>
+      ) : (
+        <button className="button__b" onClick={joinHandler}>
+          Join the group{" "}
+        </button>
+      )}
       <button className="button__d" onClick={deleteHandler}>
         Delete the group
       </button>
