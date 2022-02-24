@@ -18,18 +18,18 @@ export const fetchFunction = async (method, url_route, body) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-    try {
-      const result = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/${url_route}`,
-        { method, headers, body }
-      );
-      if (result.ok) {
-        return await result.json();
-      } else {
-        alert("Something went wrong");
-      }
-    } catch (e) {
-      alert(e);
+    const result = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/api/${url_route}`,
+      { method, headers, body }
+    );
+    if (method === "GET") {
+      try {
+        if (result.ok) {
+          return await result.json();
+        } else {
+          alert("Something went wrong");
+        }
+      } catch (e) {}
     }
   } else {
     alert("Invalid token");
