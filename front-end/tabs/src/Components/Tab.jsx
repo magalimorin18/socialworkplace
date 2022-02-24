@@ -16,7 +16,7 @@ export default function Tab() {
 
   useEffect(() => {
     fetchFunction("GET", "Group").then((groups) => setGroups(groups));
-    fetchFunction("GET", "User").then((groupsUser) =>
+    fetchFunction("GET", "User/Groups").then((groupsUser) =>
       setGroupsUser(groupsUser)
     );
   }, [refresh]); // if refresh value is modified, the useEffect will be triggered
