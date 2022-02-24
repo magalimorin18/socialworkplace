@@ -56,7 +56,6 @@ namespace backend.Controllers
 
         [HttpDelete]
         [Route("{groupId}")]
-        //TODO V2RIFIER QUE CELUI QUI LEAVE EST BIEN LE DERNIER
         public async Task<ActionResult> Delete(string groupId)
         {
             string tenantId = User.Claims.Where(c => c.Type == "http://schemas.microsoft.com/identity/claims/tenantid").FirstOrDefault().Value;
