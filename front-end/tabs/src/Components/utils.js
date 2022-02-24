@@ -3,21 +3,15 @@ import dotenv from "dotenv";
 import * as microsoftTeams from "@microsoft/teams-js";
 dotenv.config();
 
-const getToken = () => {
-  let token = "";
-  const authTokenRequest = {
-    successCallback: function (result) {
-      token = result;
-    },
-    failureCallback: function (error) {
-      alert("Failure: " + error);
-    },
-  };
-  microsoftTeams.authentication.getAuthToken(authTokenRequest);
-  return token;
-};
+microsoftTeams.initialize();
+const getToken = new Promise((resolve, reject) => {
+  microsoftTeams.authentication.getAuthToken({
+    successCallback: (result) => resolve(result),
+    failureCallback: (error) => reject(error),
+  });
+});
 export const fetchFunction = async (method, url_route, body) => {
-  const token = getToken();
+  const token = await getToken;
   if (token) {
     const headers = {
       accept: "text/plain",
@@ -39,5 +33,6 @@ export const fetchFunction = async (method, url_route, body) => {
     }
   } else {
     alert("Invalid token");
+    return [];
   }
 };
