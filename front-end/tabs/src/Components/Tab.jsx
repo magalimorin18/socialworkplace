@@ -14,7 +14,11 @@ export default function Tab() {
   };
 
   useEffect(() => {
-    fetchFunction("GET", "Group").then((groups) => setGroups(groups));
+    fetchFunction("GET", "Group").then((groups) => {
+      setGroups(groups);
+      console.log(groups);
+    });
+
     fetchFunction("GET", "User/Groups").then((groupsUser) =>
       setGroupsUser(groupsUser)
     );

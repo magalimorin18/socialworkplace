@@ -26,7 +26,6 @@ function GroupItem(props) {
       props.refreshPage();
     }
   }
-
   // TODO cleaner les css
   return (
     <Card className="group-item">
@@ -39,7 +38,7 @@ function GroupItem(props) {
         </button>
       ) : (
         <button className="button__b" onClick={joinHandler}>
-          Join the group{" "}
+          Join the group
         </button>
       )}
       <button className="button__d" onClick={deleteHandler}>

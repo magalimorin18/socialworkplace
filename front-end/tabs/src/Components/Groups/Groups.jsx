@@ -10,7 +10,6 @@ function Groups(props) {
   const filterChangeHandler = (event) => {
     setFilter(event.target.value);
   };
-
   return (
     <Card className="groups">
       <GroupsFilter filter={filter} onChangeFilter={filterChangeHandler} />
@@ -23,9 +22,11 @@ function Groups(props) {
               key={group.id} // id for react
               title={group.title}
               refreshPage={props.refreshPage}
-              isInGroup={props.groupsUser.some(
-                (element) => element.id === group.id
-              )}
+              isInGroup={props.myGroups.some((element) => {
+                console.log(group);
+                console.log(props.myGroups);
+                return element.id === group.id;
+              })}
             />
           );
         }
