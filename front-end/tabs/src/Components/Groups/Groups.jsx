@@ -14,6 +14,7 @@ function Groups(props) {
   return (
     <Card className="groups">
       <GroupsFilter filter={filter} onChangeFilter={filterChangeHandler} />
+
       {props.items.map((group) => {
         if (group.title.toLowerCase().includes(filter.toLowerCase())) {
           return (
@@ -22,6 +23,9 @@ function Groups(props) {
               key={group.id} // id for react
               title={group.title}
               refreshPage={props.refreshPage}
+              isInGroup={props.groupsUser.some(
+                (element) => element.id === group.id
+              )}
             />
           );
         }
