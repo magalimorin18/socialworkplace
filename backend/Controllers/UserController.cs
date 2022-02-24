@@ -25,7 +25,7 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        [Route("{groupId}")]
+        [Route("Groups")]
         public async Task<ActionResult<List<Models.Group>>> Get()
         {
             string tenantId = User.Claims.Where(c => c.Type == "http://schemas.microsoft.com/identity/claims/tenantid").FirstOrDefault().Value;
