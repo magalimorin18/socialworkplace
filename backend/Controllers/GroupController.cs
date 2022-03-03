@@ -16,9 +16,8 @@ namespace backend.Controllers
 
     public class GroupController : ControllerBase
     {
-        private readonly string teamId;
+        private readonly Dictionary<string, string> teamIdDic;
         private readonly GraphServiceClient graphClient;
-
         public GroupController(IConfiguration configuration)
         {
             var cred = new ClientSecretCredential(configuration.GetValue<string>("AzureAd:TenantId"),
@@ -26,14 +25,14 @@ namespace backend.Controllers
                                                 configuration.GetValue<string>("AzureAd:ClientSecret"));
             graphClient = new GraphServiceClient(cred);
 
-            teamId = configuration.GetValue<string>("Teams:TeamId");
-
-
+            teamIdDic = configuration.GetSection("Teams:TeamId").Get<Dictionary<string, string>>();
         }
 
         [HttpGet]
         public async Task<ActionResult> Get()
         {
+            string tenantId = User.Claims.Where(c => c.Type == "http://schemas.microsoft.com/identity/claims/tenantid").FirstOrDefault().Value;
+            string teamId = teamIdDic[tenantId];
             var rawGroups = await graphClient.Teams[teamId].Channels.Request()
                                                                     .Filter("membershipType eq 'private'")
                                                                     .GetAsync();
@@ -50,7 +49,7 @@ namespace backend.Controllers
         [HttpPost]
         public async Task<ActionResult<string>> Post(Models.Group group)
         {
-            var userPreferredUsername = User.Claims.Where(c => c.Type == "preferred_username").FirstOrDefault().Value;
+            var userOID = User.Claims.Where(c => c.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier").FirstOrDefault().Value;
             var channel = new Channel
             {
                 DisplayName = group.Title,
@@ -65,12 +64,14 @@ namespace backend.Controllers
                         },
                         AdditionalData = new Dictionary<string, object>()
                         {
-                            {"user@odata.bind", $"https://graph.microsoft.com/v1.0/users('{userPreferredUsername}')"}
+                            {"user@odata.bind", $"https://graph.microsoft.com/v1.0/users('{userOID}')"}
                         }
                     }
                 }
 
             };
+            string tenantId = User.Claims.Where(c => c.Type == "http://schemas.microsoft.com/identity/claims/tenantid").FirstOrDefault().Value;
+            string teamId = teamIdDic[tenantId];
             var createdChannel = await graphClient.Teams[teamId].Channels.Request().AddAsync(channel);
             return Created(Request.Path.ToString() + "/" + createdChannel.DisplayName,
                             new Models.Group
@@ -84,6 +85,8 @@ namespace backend.Controllers
         [Route("{groupId}")]
         public async Task<ActionResult> Delete(string groupId)
         {
+            string tenantId = User.Claims.Where(c => c.Type == "http://schemas.microsoft.com/identity/claims/tenantid").FirstOrDefault().Value;
+            string teamId = teamIdDic[tenantId];
             await graphClient.Teams[teamId].Channels[groupId].Request().DeleteAsync();
             return NoContent();
         }

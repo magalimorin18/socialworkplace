@@ -16,7 +16,6 @@
 
 # misc
 .DS_Store
-.env
 .deployment
 .env.teamsfx.dev
 .env.config

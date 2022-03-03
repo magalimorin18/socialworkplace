@@ -17,7 +17,7 @@ namespace backend.Controllers
 
     public class MembershipController : ControllerBase
     {
-        private readonly string teamId;
+        private readonly Dictionary<string, string> teamIdDic;
         private readonly GraphServiceClient graphClient;
 
         public MembershipController(IConfiguration configuration)
@@ -27,14 +27,14 @@ namespace backend.Controllers
                                                 configuration.GetValue<string>("AzureAd:ClientSecret"));
             graphClient = new GraphServiceClient(cred);
 
-            teamId = configuration.GetValue<string>("Teams:TeamId");
+            teamIdDic = configuration.GetSection("Teams:TeamId").Get<Dictionary<string, string>>();
         }
 
         [HttpPut]
         [Route("{groupId}")]
         public async Task<ActionResult> Put(string groupId)
         {
-            var userPreferredUsername = User.Claims.Where(c => c.Type == "preferred_username").FirstOrDefault().Value;
+            var userOID = User.Claims.Where(c => c.Type == "http://schemas.microsoft.com/identity/claims/objectidentifier").FirstOrDefault().Value;
 
             var convMember = new AadUserConversationMember
             {
@@ -44,9 +44,12 @@ namespace backend.Controllers
                 },
                 AdditionalData = new Dictionary<string, object>()
                 {
-                    {"user@odata.bind", $"https://graph.microsoft.com/v1.0/users('{userPreferredUsername}')"}
+                    {"user@odata.bind", $"https://graph.microsoft.com/v1.0/users('{userOID}')"}
                 }
             };
+
+            string tenantId = User.Claims.Where(c => c.Type == "http://schemas.microsoft.com/identity/claims/tenantid").FirstOrDefault().Value;
+            string teamId = teamIdDic[tenantId];
             await graphClient.Teams[teamId].Channels[groupId].Members.Request().AddAsync(convMember);
             return Ok();
         }
@@ -55,20 +58,29 @@ namespace backend.Controllers
         [Route("{groupId}")]
         public async Task<ActionResult> Delete(string groupId)
         {
+            string tenantId = User.Claims.Where(c => c.Type == "http://schemas.microsoft.com/identity/claims/tenantid").FirstOrDefault().Value;
+            string teamId = teamIdDic[tenantId];
+
             var convMembers = await graphClient.Teams[teamId].Channels[groupId].Members.Request().GetAsync();
-            if (convMembers.Count <= 1)
-            {
-                await graphClient.Teams[teamId].Channels[groupId].Request().DeleteAsync();
-                return NoContent();
-            }
 
             var userName = User.Claims.Where(c => c.Type == "name").FirstOrDefault().Value;
-            var convUserId = convMembers.Where(u => u.DisplayName == userName).FirstOrDefault().Id;
-            await graphClient.Teams[teamId].Channels[groupId].Members[convUserId].Request().DeleteAsync();
+            try
+            {
+                var convUserId = convMembers.Where(u => u.DisplayName == userName).FirstOrDefault().Id;
 
-            return NoContent();
+                if (convMembers.Count <= 1)
+                {
+                    await graphClient.Teams[teamId].Channels[groupId].Request().DeleteAsync();
+                    return NoContent();
+                }
+                await graphClient.Teams[teamId].Channels[groupId].Members[convUserId].Request().DeleteAsync();
+
+                return NoContent();
+            }
+            catch
+            {
+                return UnprocessableEntity("You can't leave a group if you are not a member of it!");
+            }
         }
-
-
     }
 }
