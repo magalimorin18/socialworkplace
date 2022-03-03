@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Groups from "./Groups/Groups";
+import SeeAll from "./Groups/SeeAll";
 import GroupForm from "./NewGroup/GroupForm";
 import Header from "./UI/Header";
 import { fetchFunction } from "./utils.js";
@@ -16,21 +16,40 @@ export default function Tab() {
 
   useEffect(() => {
     ReactGA.pageview(window.location.pathname);
-    fetchFunction("GET", "Group").then((groups) => {
-      setGroups(groups);
-      console.log(groups);
-    });
 
-    fetchFunction("GET", "User/Groups").then((groupsUser) =>
-      setGroupsUser(groupsUser)
-    );
+    const onSucessGroups = async (result) => {
+      result = await result.json();
+      setGroups(result);
+    };
+    const onSucessGroupsUser = async (result) => {
+      result = await result.json();
+      setGroupsUser(result);
+    };
+
+    const onError = () => {
+      alert("The groups cannot be loaded");
+    };
+
+    const fetchGroups = async () => {
+      await fetchFunction(
+        { method: "GET", route: "User/Groups" },
+        onSucessGroupsUser,
+        onError
+      );
+      await fetchFunction(
+        { method: "GET", route: "Group" },
+        onSucessGroups,
+        onError
+      );
+    };
+    fetchGroups();
   }, [refresh]); // if refresh value is modified, the useEffect will be triggered
 
   return (
     <div>
       <Header />
       <GroupForm refreshPage={refreshPage} items={groups} />
-      <Groups refreshPage={refreshPage} items={groups} myGroups={groupsUser} />
+      <SeeAll refreshPage={refreshPage} items={groups} myGroups={groupsUser} />
     </div>
   );
 }

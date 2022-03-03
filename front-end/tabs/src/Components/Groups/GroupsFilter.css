@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: space-between;
   margin: 1rem 0;
+  justify-content: center;
 }
 
 .groups-filter label {
@@ -24,7 +25,25 @@
 }
 
 .filter_input {
-  width: 50%;
-  height: 100%;
+  border: none;
   padding: 10px;
+  border-bottom: 1px solid darkslategrey;
+  background-color: var(--color-red);
+  color: white;
+  width: 30%;
+  min-width: 200px;
+}
+
+.filter_input::placeholder {
+  color: white;
+  text-align: center;
+  font-size: 15px;
+}
+
+.filter_input:focus {
+  outline: none;
+}
+
+.search-icon {
+  margin: 10px;
 }

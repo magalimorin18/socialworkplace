@@ -1,13 +1,13 @@
-import './Header.css';
+import "./Header.css";
 
-function Header(){
-    return(
-        <header>
-            <div className ="wrapper">
-            <h1 className = "h1">Social Workplace<span className="red">.</span></h1>
-            </div>
-        </header>
-    )
+function Header() {
+  return (
+    <header className="wrapper">
+      <h1 className="h1">
+        Social Workplace<span className="dot">.</span>
+      </h1>
+    </header>
+  );
 }
 
 export default Header;
