@@ -3,6 +3,7 @@ import Groups from "./Groups/Groups";
 import GroupForm from "./NewGroup/GroupForm";
 import Header from "./UI/Header";
 import { fetchFunction } from "./utils.js";
+import ReactGA from "react-ga";
 
 export default function Tab() {
   const [groups, setGroups] = useState([]);
@@ -14,6 +15,7 @@ export default function Tab() {
   };
 
   useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
     fetchFunction("GET", "Group").then((groups) => {
       setGroups(groups);
       console.log(groups);

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./GroupForm.css";
 import { fetchFunction } from "../utils.js";
+import ReactGA from "react-ga";
 
 const GroupForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
@@ -14,6 +15,10 @@ const GroupForm = (props) => {
     const listGroupTitle = props.items.map((group) => group.title);
     const isExistingTitle = listGroupTitle.includes(enteredTitle);
     if (enteredTitle !== "" && !isExistingTitle) {
+      ReactGA.event({
+        category: "User",
+        action: "Created a new group",
+      });
       const body = JSON.stringify({ title: enteredTitle });
       await fetchFunction("POST", "Group", body);
       props.refreshPage();
