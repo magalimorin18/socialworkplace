@@ -1,85 +1,64 @@
 .group-item {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 0.5rem;
-  margin: 1rem 0;
-  background-color: white;
-}
-
-.group-item__description {
-  display: flex;
+  margin: 10px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
+  width: 200px;
   flex-direction: column;
-  gap: 1rem;
-  align-items: flex-end;
-  flex-flow: column-reverse;
-  justify-content: flex-start;
-  flex: 1;
+}
+.title {
+  text-align: center;
+  overflow-wrap: anywhere;
+  height: 70px;
+  overflow: auto;
 }
 
-.button__b {
-  font: inherit;
+.buttons {
+  text-align: center;
+}
+
+.button {
+  padding: 10px;
+  margin: 5px;
   cursor: pointer;
-  padding: 1rem 2rem;
-  border: 1px solid rgb(71, 114, 255);
-  background-color: rgb(71, 114, 255);
+  text-align: center;
+  width: 150px;
+  border-radius: 2px;
+}
+
+.button-join:hover {
+  background-color: white;
+  color: rgb(39, 193, 144);
+}
+
+.button-leave:hover {
+  color: var(--color-red);
+  border: 1px solid var(--color-red);
+}
+
+.button-delete:hover {
+  color: var(--color-red);
+}
+
+.button-join {
+  background-color: rgb(39, 193, 144);
   color: white;
-  border-radius: 12px;
-  margin-right: 1rem;
-}
-.button__b:hover,
-.button__b:active {
-  background-color: #510674;
-  border-color: #510674;
+  border: 1px solid rgb(39, 193, 144);
 }
 
-.button__b.alternative {
-  color: #220131;
-  border-color: transparent;
-  background-color: transparent;
+.button-leave {
+  background-color: white;
+  color: rgb(39, 193, 144);
+  border: 1px solid rgb(39, 193, 144);
 }
 
-.button__d {
-  font: inherit;
-  cursor: pointer;
-  padding: 1rem 2rem;
-  border: 1px solid rgb(255, 70, 72);
-  background-color: rgb(255, 70, 72);
-  color: white;
-  border-radius: 12px;
-  margin-right: 1rem;
-}
-.button__d:hover,
-.button__d:active {
-  background-color: #510674;
-  border-color: #510674;
-}
-
-.button__d.alternative {
-  color: #220131;
-  border-color: transparent;
-  background-color: transparent;
-}
-
-.new-group button.alternative:hover,
-.new-group button.alternative:active {
-  background-color: #ddb3f8;
-}
-
-@media (min-width: 580px) {
-  .group-item__description {
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    flex: 1;
-  }
-
-  .group-item__description h2 {
-    font-size: 1.25rem;
-  }
-
-  .group-item__price {
-    font-size: 1.25rem;
-    padding: 0.5rem 1.5rem;
-  }
+.button-delete {
+  border: none;
+  text-decoration: underline;
+  color: grey;
+  background-color: #f9f9f9;
 }
