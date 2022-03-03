@@ -1,4 +1,3 @@
-/// Fonction fetch ///
 import dotenv from "dotenv";
 import * as microsoftTeams from "@microsoft/teams-js";
 dotenv.config();
@@ -10,7 +9,7 @@ const getToken = new Promise((resolve, reject) => {
     failureCallback: (error) => reject(error),
   });
 });
-export const fetchFunction = async (method, url_route, body) => {
+export const fetchFunction = async (request, onSucess, onError) => {
   const token = await getToken;
   if (token) {
     const headers = {
@@ -19,20 +18,14 @@ export const fetchFunction = async (method, url_route, body) => {
       Authorization: `Bearer ${token}`,
     };
     const result = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/api/${url_route}`,
-      { method, headers, body }
+      `${process.env.REACT_APP_BACKEND_URL}/api/${request.route}`,
+      { method: request.method, headers, body: request.body }
     );
-    if (method === "GET") {
-      try {
-        if (result.ok) {
-          return await result.json();
-        } else {
-          alert("Something went wrong");
-        }
-      } catch (e) {}
+
+    if (result.ok) {
+      onSucess(result);
+    } else {
+      onError();
     }
-  } else {
-    alert("Invalid token");
-    return [];
   }
 };

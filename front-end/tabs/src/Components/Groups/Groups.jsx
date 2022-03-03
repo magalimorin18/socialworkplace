@@ -1,38 +1,34 @@
 import "./Groups.css";
-import Card from "../UI/Card";
 import GroupItem from "./GroupItem";
-import GroupsFilter from "./GroupsFilter";
-import React, { useState } from "react";
+import React from "react";
 
 function Groups(props) {
-  const [filter, setFilter] = useState("");
-
-  const filterChangeHandler = (event) => {
-    setFilter(event.target.value);
-  };
   return (
-    <Card className="groups">
-      <GroupsFilter filter={filter} onChangeFilter={filterChangeHandler} />
-
-      {props.items.map((group) => {
-        if (group.title.toLowerCase().includes(filter.toLowerCase())) {
-          return (
-            <GroupItem
-              id={group.id}
-              key={group.id} // id for react
-              title={group.title}
-              refreshPage={props.refreshPage}
-              isInGroup={props.myGroups.some((element) => {
-                console.log(group);
-                console.log(props.myGroups);
-                return element.id === group.id;
-              })}
-            />
-          );
-        }
-        return <></>;
-      })}
-    </Card>
+    <div className="groups">
+      {props.items
+        .filter((group) =>
+          group.title.toLowerCase().includes(props.filter.toLowerCase())
+        )
+        .map((group) => (
+          <GroupItem
+            id={group.id}
+            key={group.id} // id for react
+            title={group.title}
+            refreshPage={props.refreshPage}
+            isInGroup={props.myGroups.some((element) => {
+              return element.id === group.id;
+            })}
+          />
+        ))
+        .sort((a, b) => {
+          if (a.props.isInGroup === b.props.isInGroup) {
+            const x = a.props.title;
+            const y = b.props.title;
+            return x.toString().localeCompare(y.toString());
+          }
+          return a.props.isInGroup ? 1 : -1;
+        })}
+    </div>
   );
 }
 

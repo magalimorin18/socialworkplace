@@ -1,21 +1,17 @@
-.wrapper
-{
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 10px ;
-    display: inline-block;
+.wrapper {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+  display: inline-block;
 }
 
-.red
-{
-    color:red;
+.dot {
+  color: var(--color-red);
 }
 
-.h1
-{
-    font-family: 'Crete Roud',serif;
-    font-size : 50px;
-    color: #444;
-    float: left;
-    margin-top: 32px;
+.h1 {
+  font-size: 50px;
+  color: #444;
+  float: left;
+  margin-top: 5px;
 }

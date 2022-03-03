@@ -10,32 +10,40 @@ const GroupForm = (props) => {
   };
 
   const submitHandler = async (event) => {
-    event.preventDefault(); //empeche le formulaire de recharger la page
+    event.preventDefault(); //prevent the form to refresh the page
     const listGroupTitle = props.items.map((group) => group.title);
     const isExistingTitle = listGroupTitle.includes(enteredTitle);
     if (enteredTitle !== "" && !isExistingTitle) {
       const body = JSON.stringify({ title: enteredTitle });
-      await fetchFunction("POST", "Group", body);
-      props.refreshPage();
-      setEnteredTitle("");
+      const onSucess = () => {
+        alert(`You created the group ${enteredTitle}!`);
+        props.refreshPage();
+        setEnteredTitle("");
+      };
+      const onError = () => {
+        alert(`The group ${enteredTitle} couldn't be added`);
+      };
+      await fetchFunction(
+        { method: "POST", route: "Group", body },
+        onSucess,
+        onError
+      );
     }
   };
 
   return (
     <form onSubmit={submitHandler} className="new-group">
-      <div className="new-group__controls">
-        <div className="new-group__control">
-          <label>Title</label>
-          <input
-            type="text"
-            value={enteredTitle}
-            onChange={titleChangeHandler}
-          />
-        </div>
-        <div className="new-group__actions">
-          <button type="submit"> Create a New Group </button>
-        </div>
-      </div>
+      <input
+        className="new-group-title-input"
+        id="title"
+        type="text"
+        placeholder="Enter title"
+        value={enteredTitle}
+        onChange={titleChangeHandler}
+      />
+      <button className="new-group-button button" type="submit">
+        Create a new group
+      </button>
     </form>
   );
 };
