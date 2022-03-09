@@ -15,11 +15,10 @@ export default function Tab() {
   };
 
   useEffect(() => {
-    ReactGA.initialize("UA-221891417-1", { debug: true });
-    ReactGA.set({ userId: "AZER" });
+    ReactGA.initialize("UA-221891417-1", { gaOptions: { anonymizeIp: true } });
 
     ReactGA.pageview(window.location.pathname);
-  });
+  }, []);
 
   useEffect(() => {
     const onSucessGroups = async (result) => {
@@ -52,16 +51,6 @@ export default function Tab() {
 
   return (
     <div>
-      <button
-        onClick={() =>
-          ReactGA.event({
-            category: "User",
-            action: "Created a new group",
-          })
-        }
-      >
-        Click me
-      </button>
       <Header />
       <GroupForm refreshPage={refreshPage} items={groups} />
       <SeeAll refreshPage={refreshPage} items={groups} myGroups={groupsUser} />

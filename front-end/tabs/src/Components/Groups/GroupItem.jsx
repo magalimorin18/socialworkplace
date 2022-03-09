@@ -1,6 +1,7 @@
 import React from "react";
 import "./GroupItem.css";
 import { fetchFunction } from "../utils.js";
+import ReactGA from "react-ga";
 
 function GroupItem(props) {
   const joinHandler = async () => {
@@ -10,6 +11,10 @@ function GroupItem(props) {
         () => {
           alert(`You joined the group ${props.title}!`);
           props.refreshPage();
+          ReactGA.event({
+            category: "User",
+            action: "Join a group",
+          });
         },
         () => alert("You can't join the group")
       );
@@ -25,6 +30,10 @@ function GroupItem(props) {
         () => {
           alert(`You deleted the group ${props.title}!`);
           props.refreshPage();
+          ReactGA.event({
+            category: "Group",
+            action: "Delete a group",
+          });
         },
         () => alert("You can't delete the group")
       );
@@ -38,6 +47,10 @@ function GroupItem(props) {
         () => {
           alert(`You are not in the group ${props.title} anymore!`);
           props.refreshPage();
+          ReactGA.event({
+            category: "User",
+            action: "Leave a group",
+          });
         },
         () => alert("You can't leave the group")
       );

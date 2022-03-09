@@ -21,7 +21,7 @@ const GroupForm = (props) => {
         props.refreshPage();
         setEnteredTitle("");
         ReactGA.event({
-          category: "User",
+          category: "Group",
           action: "Created a new group",
         });
       };
