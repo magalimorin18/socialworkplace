@@ -5,6 +5,7 @@
 
 :root {
   --color-red: rgb(255, 70, 72);
+  --color-green: #5cb85c;
 }
 html {
   font-family: "Inter", sans-serif;

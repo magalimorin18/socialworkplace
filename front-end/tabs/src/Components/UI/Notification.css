@@ -1,0 +1,89 @@
+@keyframes FadeIn {
+  0% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 100%;
+  }
+}
+@keyframes FadeOut {
+  0% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 0%;
+  }
+}
+
+.notifs {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.notif {
+  color: #fff;
+  margin: 10px;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  position: relative;
+  box-shadow: 0px 15px 35px hsla(0, 0%, 0%, 0.2);
+  width: 200px;
+}
+
+.animation-fadeIn {
+  animation: FadeIn 0.4s;
+}
+.animation-fadeOut {
+  animation: FadeOut 0.4s;
+}
+
+.notif-info {
+  background-color: #5bc0de;
+}
+
+.notif-error {
+  background-color: var(--color-red);
+}
+
+.notif-warning {
+  background-color: #eea236;
+}
+
+.notif-success {
+  background-color: var(--color-green);
+}
+
+.text {
+  font-size: 15px;
+  padding: inherit;
+  margin: auto;
+  text-align: center;
+  width: 150px;
+}
+
+.cross {
+  cursor: pointer;
+  top: 0;
+  right: 0;
+  color: black;
+  background: none;
+  position: absolute;
+  box-shadow: none;
+  border: none;
+  margin: 5px;
+  width: 20px;
+}
+.cross:hover {
+  opacity: 50%;
+}
+
+.icon {
+  transform: translate(0, -50%);
+  width: 18px;
+  position: absolute;
+  top: 50%;
+}
