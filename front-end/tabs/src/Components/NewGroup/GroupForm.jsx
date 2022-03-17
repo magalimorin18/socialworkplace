@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import "./GroupForm.css";
 import { fetchFunction } from "../utils.js";
-import { NotifContext } from "../UI/Notification"; //Récupère pas l'export par defaut mais l'export notifcontext
+import { NotifContext } from "../UI/Notification";
 
 const GroupForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");

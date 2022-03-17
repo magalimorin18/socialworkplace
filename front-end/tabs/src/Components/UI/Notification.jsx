@@ -1,5 +1,4 @@
 import "./Notification.css";
-// import { NotifContext } from "../App";
 import React, { useState, useRef } from "react";
 import { ReactComponent as CheckIcon } from "./icons/check.svg";
 import { ReactComponent as CrossIcon } from "./icons/cross.svg";
@@ -9,7 +8,6 @@ import { ReactComponent as ErrorIcon } from "./icons/error.svg";
 export const NotifContext = React.createContext();
 
 function Notification(props) {
-  // const Notif = useContext(NotifContext);
   const [list, setList] = useState([]);
   const listRef = useRef(list);
   listRef.current = list;
