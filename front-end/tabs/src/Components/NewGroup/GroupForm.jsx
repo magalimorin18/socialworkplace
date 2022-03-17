@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./GroupForm.css";
 import { fetchFunction } from "../utils.js";
+import { NotifContext } from "../UI/Notification"; //Récupère pas l'export par defaut mais l'export notifcontext
 
 const GroupForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
+
+  const Notif = useContext(NotifContext);
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -15,18 +18,25 @@ const GroupForm = (props) => {
     const isExistingTitle = listGroupTitle.includes(enteredTitle);
     if (enteredTitle !== "" && !isExistingTitle) {
       const body = JSON.stringify({ title: enteredTitle });
-      const onSucess = () => {
-        alert(`You created the group ${enteredTitle}!`);
+      const onSuccess = () => {
+        Notif.add("success", `You created the group ${enteredTitle}!`);
         props.refreshPage();
         setEnteredTitle("");
       };
       const onError = () => {
-        alert(`The group ${enteredTitle} couldn't be added`);
+        Notif.add("error", `The group ${enteredTitle} couldn't be added`);
       };
       await fetchFunction(
         { method: "POST", route: "Group", body },
-        onSucess,
+        onSuccess,
         onError
+      );
+    } else {
+      Notif.add(
+        "info",
+        `The group ${enteredTitle} ${
+          isExistingTitle ? "already exists" : "is invalid"
+        }`
       );
     }
   };

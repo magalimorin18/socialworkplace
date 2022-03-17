@@ -20,6 +20,7 @@
 .buttons {
   text-align: center;
 }
+/* TODO : mettre les classes boutons au même endroit */
 
 .button {
   padding: 10px;
@@ -32,7 +33,7 @@
 
 .button-join:hover {
   background-color: white;
-  color: rgb(39, 193, 144);
+  color: var(--color-green);
 }
 
 .button-leave:hover {
@@ -45,15 +46,15 @@
 }
 
 .button-join {
-  background-color: rgb(39, 193, 144);
+  background-color: var(--color-green);
   color: white;
-  border: 1px solid rgb(39, 193, 144);
+  border: 1px solid var(--color-green);
 }
 
 .button-leave {
   background-color: white;
-  color: rgb(39, 193, 144);
-  border: 1px solid rgb(39, 193, 144);
+  color: var(--color-green);
+  border: 1px solid var(--color-green);
 }
 
 .button-delete {
