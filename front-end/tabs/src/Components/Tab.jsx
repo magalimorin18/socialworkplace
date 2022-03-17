@@ -47,7 +47,8 @@ export default function Tab() {
       );
     };
     fetchGroups();
-  }, [refresh]); // if refresh value is modified, the useEffect will be triggered
+    // eslint-disable-next-line
+  }, [refresh]); //No need to pass Notif because there will be an infinite loop. Notif will not change.
 
   return (
     <div>
