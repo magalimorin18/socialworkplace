@@ -3,7 +3,7 @@ import SeeAll from "./Groups/SeeAll";
 import GroupForm from "./NewGroup/GroupForm";
 import Header from "./UI/Header";
 import { fetchFunction } from "./utils.js";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 
 export default function Tab() {
   const [groups, setGroups] = useState([]);
@@ -15,9 +15,7 @@ export default function Tab() {
   };
 
   useEffect(() => {
-    ReactGA.initialize("UA-221891417-1", { gaOptions: { anonymizeIp: true } });
-
-    ReactGA.pageview(window.location.pathname);
+    ReactGA.send(window.location.pathname);
   }, []);
 
   useEffect(() => {

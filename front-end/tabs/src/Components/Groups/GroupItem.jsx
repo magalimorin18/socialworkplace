@@ -1,7 +1,7 @@
 import React from "react";
 import "./GroupItem.css";
 import { fetchFunction } from "../utils.js";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 
 function GroupItem(props) {
   const joinHandler = async () => {

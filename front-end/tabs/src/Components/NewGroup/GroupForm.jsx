@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./GroupForm.css";
 import { fetchFunction } from "../utils.js";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 
 const GroupForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
