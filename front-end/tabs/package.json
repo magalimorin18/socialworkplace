@@ -12,7 +12,7 @@
     "msteams-react-base-component": "^3.1.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-ga44": "^1.4.1",
+    "react-ga4": "^1.4.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^4.0.3"
   },
