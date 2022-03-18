@@ -1,12 +1,13 @@
 import React from "react";
 import "./GroupsFilter.css";
+import { ReactComponent as SearchIcon } from "../UI/icons/search.svg";
 
 const GroupsFilter = (props) => {
   return (
     <div className="groups-filter">
       <div className="groups-filter__control">
-        <label for="id-input">
-          <img className="search-icon" src="loupe.png" alt="search item" />
+        <label htmlFor="id-input">
+          <SearchIcon className="search-icon" />
         </label>
         <input
           id="id-input"

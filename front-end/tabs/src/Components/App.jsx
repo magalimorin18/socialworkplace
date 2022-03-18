@@ -15,28 +15,33 @@ ReactGA.initialize(process.env.REACT_APP_GA_ID, {
   gaOptions: { anonymizeIp: true },
 });
 
+import Notification from "./UI/Notification";
+
 export default function App() {
   const { theme, loading } = useTeamsFx();
+
   return (
-    <Provider
-      theme={theme || teamsTheme}
-      styles={{ backgroundColor: "#f9f9f9" }}
-    >
-      <Router>
-        <Route exact path="/">
-          <Redirect to="/tab" />
-        </Route>
-        {loading ? (
-          <Loader style={{ margin: 100 }} />
-        ) : (
-          <>
-            <Route exact path="/privacy" component={Privacy} />
-            <Route exact path="/termsofuse" component={TermsOfUse} />
-            <Route exact path="/tab" component={Tab} />
-            <Route exact path="/config" component={TabConfig} />
-          </>
-        )}
-      </Router>
-    </Provider>
+    <Notification>
+      <Provider
+        theme={theme || teamsTheme}
+        styles={{ backgroundColor: "#f9f9f9" }}
+      >
+        <Router>
+          <Route exact path="/">
+            <Redirect to="/tab" />
+          </Route>
+          {loading ? (
+            <Loader style={{ margin: 100 }} />
+          ) : (
+            <>
+              <Route exact path="/privacy" component={Privacy} />
+              <Route exact path="/termsofuse" component={TermsOfUse} />
+              <Route exact path="/tab" component={Tab} />
+              <Route exact path="/config" component={TabConfig} />
+            </>
+          )}
+        </Router>
+      </Provider>
+    </Notification>
   );
 }
