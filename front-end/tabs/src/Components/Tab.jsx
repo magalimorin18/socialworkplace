@@ -5,6 +5,7 @@ import Header from "./UI/Header";
 import { fetchFunction } from "./utils.js";
 import { NotifContext } from "./UI/Notification";
 import { ReactComponent as LoadingIcon } from "./UI/icons/loading.svg";
+import ReactGA from "react-ga4";
 import "./Tab.css";
 
 export default function Tab() {
@@ -18,6 +19,10 @@ export default function Tab() {
   const refreshPage = () => {
     setRefresh(!refresh);
   };
+
+  useEffect(() => {
+    ReactGA.send(window.location.pathname);
+  }, []);
 
   useEffect(() => {
     const onSucessGroups = async (result) => {

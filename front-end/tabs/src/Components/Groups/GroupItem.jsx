@@ -2,7 +2,7 @@ import React from "react";
 import "./GroupItem.css";
 import { fetchFunction } from "../utils.js";
 import Popup, { usePopup } from "../UI/Popup";
-
+import ReactGA from "react-ga4";
 import { useContext } from "react";
 import { NotifContext } from "../UI/Notification";
 
@@ -15,6 +15,10 @@ function GroupItem(props) {
       () => {
         Notif.add("success", `You joined the group ${props.title}!`);
         props.refreshPage();
+        ReactGA.event({
+          category: "User",
+          action: "Join a group",
+        });
       },
       () => Notif.add("error", "You can't join the group")
     );
@@ -26,6 +30,10 @@ function GroupItem(props) {
       () => {
         Notif.add("success", `You deleted the group ${props.title}!`);
         props.refreshPage();
+        ReactGA.event({
+          category: "Group",
+          action: "Delete a group",
+        });
       },
       () => Notif.add("error", "You can't delete the group")
     );
@@ -40,6 +48,10 @@ function GroupItem(props) {
           `You are not in the group ${props.title} anymore!`
         );
         props.refreshPage();
+        ReactGA.event({
+          category: "User",
+          action: "Leave a group",
+        });
       },
       () => Notif.add("error", "You can't leave the group")
     );

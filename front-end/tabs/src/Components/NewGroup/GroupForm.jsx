@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import "./GroupForm.css";
 import { fetchFunction } from "../utils.js";
+import ReactGA from "react-ga4";
 import { NotifContext } from "../UI/Notification";
 
 const GroupForm = (props) => {
@@ -22,6 +23,10 @@ const GroupForm = (props) => {
         Notif.add("success", `You created the group ${enteredTitle}!`);
         props.refreshPage();
         setEnteredTitle("");
+        ReactGA.event({
+          category: "Group",
+          action: "Created a new group",
+        });
       };
       const onError = () => {
         Notif.add("error", `The group ${enteredTitle} couldn't be added`);
