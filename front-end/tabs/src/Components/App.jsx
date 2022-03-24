@@ -7,6 +7,7 @@ import TermsOfUse from "./TermsOfUse";
 import Tab from "./Tab";
 import "./App.css";
 import TabConfig from "./TabConfig";
+import Notification from "./UI/Notification";
 import ReactGA from "react-ga4";
 import dotenv from "dotenv";
 dotenv.config();
@@ -14,8 +15,6 @@ dotenv.config();
 ReactGA.initialize(process.env.REACT_APP_GA_ID, {
   gaOptions: { anonymizeIp: true },
 });
-
-import Notification from "./UI/Notification";
 
 export default function App() {
   const { theme, loading } = useTeamsFx();
