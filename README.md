@@ -93,6 +93,27 @@ In console run the command `dotnet run`.
 ### Azure Ad configuration
 
 In order to be able to call the Microsoft Graph API, we need to register the application on [Microsoft Azure](https://portal.azure.com).
+This app will need some permissions.
+In `API permissions` >> click on Add a permission, and add the following Microsoft Graph permissions:
+
+- Delegated permissions:
+
+  - `Channel.ReadBasic.All`, to be able to get all the channel a user is in.
+
+- Application permissions:
+  - `Channel.Create`, to be able to add a new channel.
+  - `Channel.Delete.All`, to be able to delete a channel.
+  - `Channel.ReadBasic.All`, to be able to get all the channels.
+  - `ChannelMember.ReadWrite.All`, to be able to add and remove a user from a channel.
+
+To use the Microsoft authentication in the front, we need to add some client application.
+In `Expose an API` >> `Add a client application`, and add the followings clients id:
+
+- `1fec8e78-bce4-4aaf-ab1b-5451cc387264`
+- `5e3ce6c0-2b1f-4285-8d4b-75ee78787346`
+- `4345a7b9-9a63-4910-a426-35363201d503`
+- `4765445b-32c6-49b0-83e6-1d93765276ca`
+- `d3590ed6-52b3-4102-aeff-aad2292ab01c`
 
 ## :package: Organisation of the project
 
